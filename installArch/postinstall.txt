@@ -1,0 +1,25 @@
+Post-installation notes:
+-[Audio]
+	-Instal alsa-utils package, which allows use of amixer.
+
+-[Display dirver]
+	-Install xf86-video-intel for intel CPU
+	 It provides the DDX driver for 2D acceleration and it pulls in mesa as a dependency, providing the DRI driver for 3D acceleration.
+	-Install mesa-libgl to enable OpenGL support
+	-Install lib32-mesa-libgl to enable OpenGL on 32 bit (Optional)
+
+
+-[Editor]
+	-Instal emacs, and set -o emacs
+
+
+-[Fonts]
+	-Instal ttf-dejave package
+	 As only unscaleable fonts are availiable after installation, fonts looks ugly
+
+-[ImageViewer]
+	-Gwenview: nice graphical image viewer
+	-gpicview: nice image viewer to use with i3wm
+
+-[Video Player]
+	-VLC comes with decoder and everything you need
