@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("dired"
+ (filename . "~/Documents/Docs/")
+ (front-context-string . "tax 2015\n  drwx-")
+ (rear-context-string . "96 Mar 28 18:34 ")
+ (position . 510))
+)

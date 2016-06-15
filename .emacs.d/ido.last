@@ -1,0 +1,43 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/yulu/Documents/Python/" . "Entrainment/")
+ ("/home/" . "yulu/")
+ ("/" . "home/")
+ ("/home/yulu/" . ".emacs.d/")
+ ("/home/yulu/Documents/" . "C++/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/yulu/Documents/"
+ "/home/yulu/Documents/Python/Entrainment/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "EntrainNum_wire_scan.py"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/yulu/Documents/" (22367 17639 81643 96000) "COMSOL/" "Labview/" "Python/" "C++/" "R/" "../" ".#emacstest.txt" "Archinstall/" "Research/" "#emacstest.txt#" "./" "Codes/" "Docs/" "LearnNew/" "UTWireless/")
+
+ ("/home/yulu/Documents/Python/Entrainment/" (22365 52210 486318 497000) "date_20160602_ribbon_wire_longer_pulse.m" "../" "EntrainNum_wire_scan.py" "./" "EntrainNum_wire_scan.py~" "#date_20160602_ribbon_wire_longer_pulse.m#" "__pycache__/")
+
+ ("/home/yulu/Documents/Python/" (22361 57219 442932 378000) "date_20160602_ribbon_wire_longer_pulse.m" "UsePythonToAccessWebData/" "test_analysis/" "../" "./" "RydbergImaging/" "course/" "TGGTesting/" "quiz2_contour.py" "slower/" "PickUpCoil/" "Py_Rydberg/" "Lab102M/" "practice/" "__pycache__/" "Entrainment/" "CircuitTesting/")
+
+ ("/home/yulu/" (22367 12450 544844 665000) ".bash_logout" "Software/" ".gitconfig" ".bash_profile" ".Xauthority.backup" ".bashrc" ".gnome/" ".esd_auth" ".vimperator/" ".adobe/" ".emacs.d/" "Templates/" ".comsol/" "../" ".xinitrc.backup" ".ICEauthority" ".bashrc~" ".xinitrc~" "Documents/" ".lesshst" ".xbindkeysrc" ".bash_history" ".gnupg/" "GitHub/" ".emacs" ".fehbg" "Zotero/" ".i3/" "Music/" "./" ".xbindkeysrc~" ".cache/" ".java/" ".links/" "Downloads/" "Videos/" ".ssh/" ".python_history" ".config/" ".wget-hsts" "Desktop/" "Public/" ".local/" ".mozilla/" ".ipython/" ".npm/" ".macromedia/" ".Xauthority" ".archey3.cfg" "Pictures/")
+
+ ("/home/yulu/.emacs.d/" (22348 30015 501121 750000) "../" "auto-save-list/" "./" "tramp")
+
+ ("/home/" (22337 42580 177929 822000) "../" "yulu/" "./" "lost+found/")
+
+ ("/home/yulu/Documents/C++/" (22347 34476 886654 825000) "generatePlots.py" "../" "slower.cpp" "./")
+
+ ("/home/yulu/Documents/Labview/" (22361 59886 202981 984000) "../" "./" "20160428_meas_v2.vi")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
