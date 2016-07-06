@@ -49,9 +49,12 @@ export PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\
 #***********\remote to lab computer by using rdesktop/*****************
 alias lab_slower='rdesktop -u slower -p slowbeam 146.6.180.210'
 alias lab_slower_full='rdesktop -u slower -p slowbeam -g 1366x768 146.6.180.210'
-alias lab_beam='rdesktop -u beam -p slowbeam 146.6.180.208'
+alias lab_beam='rdesktop -u beam -p slowbeam 146.6.180.208 -g 800x600'
+alias lab_beam_full='rdesktop -u beam -p slowbeam 146.6.180.208 -g 1366x768'
 alias lab_Karl='rdesktop -u artemis -p slowbeam 146.6.180.212'
 alias lab_Karl_full='rdesktop -u artemis -p slowbeam -g 1366x768 146.6.180.212'
+alias lab_jianyong='rdesktop -u Brownian -p amyjohn 128.83.155.3'
+alias lab_jianyong_full='rdesktop -u Brownian -p amyjohn -g 1920x1080 128.83.155.3'
 #*******\control sound of laptop speaker using amixer/****************
 
 #follow 'on' to turn on, 'off' to turn off;

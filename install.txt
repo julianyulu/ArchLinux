@@ -1,0 +1,143 @@
+Notes on newly install Arch linux from USB drive UEFI
+
+1.Download newest Arch linux image
+
+2.Write it into USB dirve(UEFI)
+	-[windows] Rufus
+	-[Linux]
+
+3.Boot from USB drive
+       -[problems]
+        If cannot get to the arch boot loader, try disable the PC secure boo
+        t option.
+       -[bugs]
+        For lenovo thinkpad X1 (4th Gen), the boot stops forever at the begining,
+        one should do add "intel_psate=no_hwp" to startup parameter (press TAB when cho
+	osing booting selections)
+
+4.Install preparation
+       -[Internet]
+        Only wired ethernet is avaliable, wifi doesn't work.
+        Try ping any website to make sure that internet works.
+       -[Partition]
+        a. lsblk check the partion on current hard drive decide where to install
+	b. gdisk /dev/sda (choose the hard drive you want) to wipe out partion table
+	c. When prompt "command ?", type x then enter, to use expert mode
+	d. Prompt "Expert command ?" type z, to wipe out the partition table
+	e. Prompt "blank out MBR", choose yes 
+	f. cgdisk /dev/sda to create new partion table
+	g. prompt warning, press any key to accept, then cloud see free space in the window,
+	h. creat boot partition:
+	   	 (1)create new
+		 (2)Enter to agree with the first sector when prompt
+		 (3)Enter the size, usually 200 ~ 300 MB, so input 300M
+		 (4)Prompt for input of hex code, enter EF00, this is for efi partition
+		    for MBR, EF04 (not recommanded)
+		 (5)Prompt for the partition name, type boot   	     	  
+	i. creat swap partition:
+	   	 (1)create new
+		 (2)Enter to agree with the first sector location
+		 (3)Enter size, usually half of the RAM, e.g. 4GiB
+		 (4)hex code for swap: 8200
+		 (5)Give name swap
+        j.creat root/home partition
+		 This depends wheater you need a seperate home partition or not
+		 (1)create new
+		 (2)Enter to agree on the first sector location
+		 (3)Enter size, (use remaining by direct hit enter)
+		 (4)hex code, use the default one by directly hit enter, code 8300 for file sys
+		 (5)Give a name: root/home
+        k.Write partition table into disk
+		 (1)select write and yes to confirm
+		 (2)select quit to quit
+
+       -[Check partion] (optional) reboot and use lsblk to check partiton wrote succeed
+
+       -[Set file systems for partions]
+        a. Make sure you remember which partition is for which (/boot, /swap, /root, /home ...)
+	   This can be easily done by using lsblk and from the size of partition you can know.
+	b. set boot partition file system
+	       mkfs.fat -F32 /dev/sda1 (choose the right partition here for the boot)
+	       fat -F32 is for efi boot loader
+	c. set swap partition file system
+	       mkswap /dev/sda2 (choose the right one for swap)
+	d. turn swap on
+	       swapon /dev/sda2 (choose the right label)
+	e. set /root or /home file system
+	       mkfs.ext4 /dev/sda4 (use ext4 file system)
+       	     	 
+5.Install Arch linux
+       -[Mount file system]
+        a. if /mnt not exists, mkdir mnt
+	b. mount root partition: mount /dev/sda4 (choose the one for root)  /mnt
+	c. mount boot partition: mkdir /mnt/boot; mount /dev/sda1(choose right one) /mnt/root
+	d. mount home partition: mkdir /mnt/home; mount /dev/sda5(choose right one) /mnt/home
+
+       -[Choos mirror list[
+        a. cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+	b. Automatic uncomment the top 6 fastest mirror in the mirrorlist
+	   (1)Uncomment all mirrors:  sed -i 's/#Server/Server' /etc/pacman.d/mirrorlist.backup
+	   (2)rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+	      This will try ping all mirrors and rand top 6 uncommented
+	      This may take up to 10 min
+
+       -[Install Arch linux base]
+        pacstrap -i /mnt base base-devel
+	agree to all
+	may take a few minutes
+
+       -[Generate fstab file]
+        genfstab -U -p /mnt >> /mnt/etc/fstab
+	check if everything is write: nano /mnt/etc/fstab
+
+       -[Basic config]
+       	a. change to root: arch-chroot /mnt
+	   set password: type: passwd
+	b. config lang:
+	   (0) nano /etc/locale.gen; uncomment en.US.UTF-8 UTF-8 for english
+	   (1) Ctrl + o to write and Ctrl + x to exit
+	   (2) generate lang config: locale-gen
+	   (3) wirte to config file: echo LANG=en.US.UTF-8 > /etc/locale.conf
+	c. config time zone:
+	   (1) check avaliable zone info: ls /etc/share/zoneinfo/
+	   (2) link the one to local time: ln -s /etc/share/zoneinfo/America/NewYork > /etc/localtime
+	d. setup hardware time:
+	   hwlock --systohc --utc
+	e. set hostname: echo yourhostname > /etc/hostname
+	f. config mirror list for 64 bit system
+	   (1)nano /etc/pacman.conf
+	   (2)edit and uncomment two lines: [multilib] include=/etc/pacman.d/mirrorlist
+	   (3)one can add whatever repo here
+	   (4)refresh and upgrade system: pacman -Syu
+	g. add default user:
+	   (1)useradd -m -g users -G wheel,storage,power -s /bin/bash yourdefaultusername
+	   (2)set password: passwd yourdefaultusername
+	h. edit sudoer file to enable sudo
+	   (1)EDITOR=nano visudo
+	   (2)uncomment the line: %wheel All=(All) All
+	   (3)add line right below the above one: Defaults rootpw (have to have rootpw to do sudo)
+	   (4)Ctrl + o and Ctrl + x to save and exit
+	i. install bash completion
+	   this allows auto fill file/package name in bash
+	   sudo pacman -S bash-completion
+
+       -[Install boot loader]
+        a. install bootctl: sudo pacman -S bootctl
+	b. type: bootctl install
+	c. make config file for bootctl: nano /boot/loader/entries/arch.conf
+	d. input: 1st line: title Arch Linux  2nd line: linux /vmlinuz-linux 3rd lind: initrd /initramfs-linux.img
+	   4th line: root=/dev/sda3 rw (choose where /root is installed)
+	e. write and exit
+
+       -[Install intel-ucode for cpu]
+        a. pacman -S intel-ucode
+	b. reedit the boot config file add line" initrd /intel-ucode.img" before the initrd line
+	c. save and exit
+
+6. umount all partitions
+   umount -R /mnt
+
+
+[all done, reboot and enjoy!]
+	
+	
