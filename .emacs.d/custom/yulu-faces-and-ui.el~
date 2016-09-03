@@ -1,0 +1,5 @@
+(provide 'yulu-faces-and-ui)
+
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (foundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (foundp 'menu-bar-mode) (menu-bar-mode -1))

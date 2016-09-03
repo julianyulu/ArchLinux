@@ -1,0 +1,12 @@
+(provide 'yulu-latex)
+
+(defun turn-on-outline-minor-mode ()
+  (outline-minor-mode 1))
+
+(require 'auto-complete)
+(add-hook 'Latex-mode-hook 'turn-on-outline-minor-mode)
+(add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
+(add-hook 'latex-mode-hook 'auto-complete-mode)
+(add-hook 'Latex-mode-hook 'auto-complete-mode)
+(setq outline-minor-mode-prefix "\C-c \C-o")
+(auto-complete-mode t)

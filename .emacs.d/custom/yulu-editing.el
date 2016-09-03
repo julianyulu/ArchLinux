@@ -47,21 +47,21 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Group: Editing -> undo-tree
 ;;Undo tree, C-x u to see the tree 
-(require 'undo-tree)
-(global-undo-tree-mode)
+;;(require 'undo-tree)
+;;(global-undo-tree-mode)
 
 ;; Group: Editing -> Flyspell
-(if (executable-find "aspell")
-    (progn
-      (setq ispell-program-name "aspell")
-      (setq ispell-extra-args '("--sug-mode=ultra")))
-  (setq ispell-program-name "ispell"))
+;;(if (executable-find "aspell")
+;;    (progn
+;;      (setq ispell-program-name "aspell")
+;;      (setq ispell-extra-args '("--sug-mode=ultra")))
+;;  (setq ispell-program-name "ispell"))
 
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+;;(add-hook 'text-mode-hook 'flyspell-mode)
+;;(add-hook 'org-mode-hook 'flyspell-mode)
+;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 
 ;;Group: Editing -> Flycheck
-(require 'flycheck)
+;;(require 'flycheck)
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
