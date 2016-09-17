@@ -1,6 +1,0 @@
-(provide 'yulu-convenience)
-
-;; Use ibuffer as default buffer
-;; Always open ibuffer in another window
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-use-other-window t) 
